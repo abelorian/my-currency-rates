@@ -18,7 +18,8 @@ class ProjectDatum < ApplicationRecord
 
   def self.update_value key
     p "actualizando data..."
-    response = open("https://openexchangerates.org/api/latest.json?app_id=<%= ENV['OPEN_EXCHANGE_RATE_APP_ID'] %>").read
+    p "#{ENV['OPEN_EXCHANGE_RATE_APP_ID']}"
+    response = open("https://openexchangerates.org/api/latest.json?app_id=#{ENV['OPEN_EXCHANGE_RATE_APP_ID']}").read
     timestamp = JSON.parse(response)["timestamp"] if response.present? && response.include?("timestamp")
     if timestamp.present?
       p "guardando..."
