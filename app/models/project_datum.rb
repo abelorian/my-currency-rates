@@ -15,6 +15,14 @@ class ProjectDatum < ApplicationRecord
     where(key: key).last.try(:value)
   end
 
+  def self.get_uf
+    require 'open-uri'
+    api_key = ENV['SBIF_API_KEY']
+    url = "https://api.sbif.cl/api-sbifv3/recursos_api/uf?apikey=#{api_key}&formato=json"
+    response = open(url).read
+    response
+  end
+
 
   def self.update_value key
     p "actualizando data..."
